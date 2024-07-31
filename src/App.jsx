@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import HowToPlay from "./components/btn3";
+
 
 const API_URL = "https://pokeapi.co/api/v2/pokedex/1";
 
@@ -19,6 +21,7 @@ function App() {
   const [clicked, setClicked] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const[index, setIndex]= useState(0);
   cards.length = 12;
 
   const createCards = async () => {
@@ -33,8 +36,11 @@ function App() {
     createCards();
   }, []);
 
+  //make the buttons functional
   return (
     <div className="pageCont">
+      <div className="header">
+
       <div className="score">
         <div className="current">
           <div className="text">Current Score:</div>
@@ -45,7 +51,22 @@ function App() {
           <div className="num">{highScore}</div>
         </div>
       </div>
+      <div className="btnGroup">
+        <button className="btn" onClick={()=> {
+          setIndex(1);
+        }}>Choose Region</button>
+        <button className="btn" onClick={()=> {
+          setIndex(2);
+        }}>Change Difficulty</button> 
+        <button className="btn" onClick={()=> {
+          setIndex(3);
+        }}>How To Play</button>
+
+      </div>
+
+      </div>
       <div>
+        <HowToPlay index ={index}/>
         <span>Do not click the same Pokemon twice!</span>
 
         <div className="gridCont">
