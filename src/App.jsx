@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import HowToPlay from "./components/btn3";
+import HowToPlay from "./components/btn";
 
 
 const API_URL = "https://pokeapi.co/api/v2/pokedex/1";
