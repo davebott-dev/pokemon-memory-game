@@ -1,20 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import HowToPlay from "./components/btn";
-
 
 const API_URL = "https://pokeapi.co/api/v2/pokedex/1";
 
-function shuffleArray(array) {
-  //add more or less pokemon in the array by changing the array length in the foor loop
-  for (let i = Math.floor(array.length / 30) - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
+
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -22,7 +11,55 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const[index, setIndex]= useState(0);
+  const [start, setStart] = useState(33);
   cards.length = 12;
+
+
+  const ShowContents = ({index}) => {
+    return index == 1 ? (
+      <div className="popUp">
+        <div className="title">Choose Your Region</div>
+        <div className="regionGroup">
+          <div className="group">
+            <div className="region" onClick={()=> {
+              setIndex(0);
+              setStart(181);
+            }}>Kanto</div>
+            <div className="region" onClick ={()=> {
+              setIndex(0);
+              setStart(181);
+            }}>Johto</div>
+            <div className="region">Hoenn</div>
+          </div>
+          <div className="group">
+            <div className="region">Sinnoh</div>
+            <div className="region">Unova</div>
+            <div className="region">Kalos</div>
+          </div>
+          <div className="group">
+            <div className="region">Alola </div>
+            <div className="region">Galar</div>
+            <div className="region">Paldea</div>
+          </div>
+        </div>
+      </div>
+    ) : index == 2 ? (
+      <div className="popUp">Choose Your Difficulty</div>
+    ) : index == 3 ? (
+      <div className="popUp">How To Play</div>
+    ) : null;
+  };
+//use arr.slice to create a segment of the large array by regions then shuffle it
+  function shuffleArray(array) {
+    //add more or less pokemon in the array by changing the array length in the foor loop
+    for (let i = start; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
 
   const createCards = async () => {
     const response = await fetch(`${API_URL}`);
@@ -66,7 +103,7 @@ function App() {
 
       </div>
       <div>
-        <HowToPlay index ={index}/>
+        <ShowContents index ={index}/>
         <span>Do not click the same Pokemon twice!</span>
 
         <div className="gridCont">
