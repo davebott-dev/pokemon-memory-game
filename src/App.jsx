@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-const API_URL = "https://pokeapi.co/api/v2/pokedex/1";
+
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -9,48 +9,12 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [index, setIndex] = useState(0);
-  const [start, setStart] = useState(33);
   const [length, setLength] = useState(9);
 
+  const API_URL = `https://pokeapi.co/api/v2/pokedex/1`;
+
   const ShowContents = ({ index }) => {
-    return index == 1 ? (
-      <div className="popUp">
-        <div className="title">Choose Your Region</div>
-        <div className="regionGroup">
-          <div className="group">
-            <div
-              className="region"
-              onClick={() => {
-                setIndex(0);
-                setStart(181);
-              }}
-            >
-              Kanto
-            </div>
-            <div
-              className="region"
-              onClick={() => {
-                setIndex(0);
-                setStart(181);
-              }}
-            >
-              Johto
-            </div>
-            <div className="region">Hoenn</div>
-          </div>
-          <div className="group">
-            <div className="region">Sinnoh</div>
-            <div className="region">Unova</div>
-            <div className="region">Kalos</div>
-          </div>
-          <div className="group">
-            <div className="region">Alola </div>
-            <div className="region">Galar</div>
-            <div className="region">Paldea</div>
-          </div>
-        </div>
-      </div>
-    ) : index == 2 ? (
+    return  index == 2 ? (
       <div className="popUp">
         <div className="title">Choose Your Difficulty</div>
         <div className="regionGroup">
@@ -137,6 +101,8 @@ function App() {
     const response = await fetch(`${API_URL}`);
     const data = await response.json();
 
+  
+
     let shuffled = shuffleArray(data.pokemon_entries);
     setCards(shuffled);
     
@@ -161,14 +127,7 @@ function App() {
           </div>
         </div>
         <div className="btnGroup">
-          <button
-            className="btn"
-            onClick={() => {
-              setIndex(1);
-            }}
-          >
-            Choose Region
-          </button>
+       
           <button
             className="btn"
             onClick={() => {
